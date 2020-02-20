@@ -11,6 +11,7 @@ namespace WebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -24,6 +25,8 @@ namespace WebApplication
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCors(builder => builder.AllowAnyOrigin());
             
             app.UseEndpoints(endpoints =>
             {

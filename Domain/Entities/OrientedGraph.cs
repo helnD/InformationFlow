@@ -25,11 +25,15 @@ namespace Domain.Entities
         public Matrix ToMatrix()
         {
             var relations = _relations.ToList();
+
+            var max1 = _relations.Max(it => it.Start);
+            var max2 = _relations.Max(it => it.End);
+            var max = max1 > max2 ? max1 : max2;
             
-            var matrix = new int[relations.Count][];
-            for (var index = 0; index < relations.Count; index++)
+            var matrix = new int[max][];
+            for (var index = 0; index < max; index++)
             {
-                matrix[index] = new int[relations.Count];
+                matrix[index] = new int[max];
             }
 
             foreach (var relation in relations)

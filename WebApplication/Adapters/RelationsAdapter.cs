@@ -30,8 +30,8 @@ namespace WebApplication.Adapters
 
             foreach (var key in keys)
             {
-                var start = int.Parse("s" + key);
-                var end = int.Parse("s" + key);
+                var start = int.Parse(_query["s" + key]);
+                var end = int.Parse(_query["e" + key]);
                 
                 result.Add(new Relation(start, end));
             }

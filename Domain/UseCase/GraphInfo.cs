@@ -9,65 +9,75 @@ namespace Domain.UseCase
         private readonly Matrix _adjacencyMatrix;
         private IEnumerable<int> _inputs;
         private IEnumerable<int> _outputs;
+        private int _power;
         private IEnumerable<Tact> _tactsOfCreation;
         private IEnumerable<Tact> _tactsOfExtinction;
         private IEnumerable<Tact> _tactsOfStore;
+
+        private IEnumerable<Matrix> _matricesToZero;
 
         public GraphInfo(OrientedGraph graph)
         {
             _adjacencyMatrix = graph.ToMatrix();
         }
 
-        public int Power { get; private set; }
+        public IEnumerable<Matrix> MatricesToZero
+        {
+            get
+            {
+                _matricesToZero ??= GetMatricesToZero();
+                return _matricesToZero;
+            }
+        }
+
+        public int Power
+        {
+            get
+            {
+                _matricesToZero ??= GetMatricesToZero();
+                return _matricesToZero.Count() - 1;
+            }
+        }
 
         public IEnumerable<int> Outputs
         {
             get
             {
-                if (_tactsOfCreation == null) _tactsOfCreation = TactsOfCreation();
+                _outputs ??= GetOutputs();
                 return _outputs;
             }
-            private set => _outputs = value;
         }
+            
 
-        public IEnumerable<int> Inputs
+        public IEnumerable<int> Inputs 
         {
             get
             {
-                if (_tactsOfCreation == null) _tactsOfCreation = TactsOfCreation();
+                _inputs ??= GetInputs();
                 return _inputs;
             }
-            private set => _inputs = value;
         }
 
         public IEnumerable<Tact> TactsOfCreation()
         {
             if (_tactsOfCreation != null) return _tactsOfCreation;
 
+            _matricesToZero ??= GetMatricesToZero();
+
             var tacts = new List<Tact>();
             var currentTact = 0;
 
-            Matrix matrix;
-
-            do
+            foreach (var matrix1 in _matricesToZero)
             {
-                matrix = _adjacencyMatrix.Power(currentTact + 1);
-
-                for (int column = 0; column < matrix.Width; column++)
+                for (var column = 0; column < matrix1.Width; column++)
                 {
-                    if (matrix.IsZeroColumn(column) && tacts.All(it => it.Node != column + 1))
+                    if (matrix1.IsZeroColumn(column) && tacts.All(it => it.Node != column + 1))
                     {
                         tacts.Add(new Tact(column + 1, currentTact));
                     }
                 }
-
                 currentTact++;
-
-            } while (!matrix.IsZeroMatrix());
-
-            Power = currentTact - 1;
-            Outputs = tacts.FindAll(it => it.Value == currentTact - 1).Select(it => it.Node).OrderBy(it => it);
-            Inputs = tacts.FindAll(it => it.Value == 0).Select(it => it.Node).OrderBy(it => it);
+            }
 
             tacts.Sort((first, second) => first.Node.CompareTo(second.Node));
 
@@ -139,6 +149,71 @@ namespace Domain.UseCase
 
             _tactsOfStore = result;
             
+            return result;
+        }
+
+
+        private IEnumerable<Matrix> GetMatricesToZero()
+        {
+            var result = new List<Matrix>();
+            
+            var currentTact = 0;
+            Matrix matrix;
+
+            do
+            {
+                matrix = _adjacencyMatrix.Power(currentTact + 1);
+
+                result.Add(matrix);
+
+                currentTact++;
+
+            } while (!matrix.IsZeroMatrix());
+
+            return result;
+        }
+        
+        private IEnumerable<int> GetInputs()
+        {
+            var result = new List<int>();
+
+            for (var column = 0; column < _adjacencyMatrix.Width; column++)
+            {
+                var columnSum = 0;
+                
+                for (var row = 0; row < _adjacencyMatrix.Height; row++)
+                {
+                    columnSum += _adjacencyMatrix[row, column];
+                }
+
+                if (columnSum == 0)
+                {
+                    result.Add(column + 1);
+                }
+            }
+
+            return result;
+        }
+        
+        private IEnumerable<int> GetOutputs()
+        {
+            var result = new List<int>();
+
+            for (var row = 0; row < _adjacencyMatrix.Height; row++)
+            {
+                var rowSum = 0;
+                
+                for (var column = 0; column < _adjacencyMatrix.Width; column++)
+                {
+                    rowSum += _adjacencyMatrix[row, column];
+                }
+
+                if (rowSum == 0)
+                {
+                    result.Add(row + 1);
+                }
+            }
+
             return result;
         }
 

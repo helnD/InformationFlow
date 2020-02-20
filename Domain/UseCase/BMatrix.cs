@@ -13,6 +13,8 @@ namespace Domain.UseCase
             _matrix = Calculate(matrix);
         }
 
+        public int Height => _matrix.Height;
+
         private Matrix Calculate(Matrix matrix)
         {
 

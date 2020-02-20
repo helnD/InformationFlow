@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using System.Collections.Generic;
+using Domain.Entities;
 using Domain.UseCase;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Adapters;
@@ -10,11 +11,15 @@ namespace WebApplication.Controllers
 
         public IActionResult Index()
         {
+            
+            return View();
+        }
 
+        public IActionResult Calculation()
+        {
             var graph = new OrientedGraph(new RelationsAdapter(Request.Query).Adapt());
 
             var adjMatrix = graph.ToMatrix();
-            var adjArrayMatrix = adjMatrix.ToArray();
 
             var graphInfo = new GraphInfo(graph);
             var taktsOfCreation = graphInfo.TactsOfCreation();
@@ -22,10 +27,21 @@ namespace WebApplication.Controllers
             var taktsOfStore = graphInfo.TactsOfStore();
             var inputs = graphInfo.Inputs;
             var outputs = graphInfo.Outputs;
+            var power = graphInfo.Power;
+
+            var powers = graphInfo.MatricesToZero;
+            var bMatrix = new BMatrix(adjMatrix);
             
-            var bMatrix = new BMatrix(adjMatrix).ToArray();
-            
-            return View();
+            var matrixAdapter = new MatrixAdapter();
+            var graphInfoAdapter = new GraphInfoAdapter();
+
+            return Json(new
+            {
+                aMatrices = matrixAdapter.AdaptAdjacencyMatrixWithPowers(adjMatrix, powers),
+                graphInfo = graphInfoAdapter.AdaptGraphInfo(power, inputs, outputs),
+                tactsTable = graphInfoAdapter.AdaptTacts(taktsOfCreation, taktsOfExtinction, taktsOfStore),
+                bMatrix = matrixAdapter.AdaptBMatrix(bMatrix)
+            });
         }
 
     }
