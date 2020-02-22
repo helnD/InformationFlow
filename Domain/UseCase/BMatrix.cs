@@ -32,7 +32,7 @@ namespace Domain.UseCase
             return result;
         }
 
-        public int SumOfRow(int row) =>
+        public int SumOfRow(int row) =>    
             _matrix[row].Sum();
 
         public int this[int row, int column] =>

@@ -16,6 +16,25 @@ namespace Tests
             new Relation(3, 2)
         });
         
+        private OrientedGraph _notCoupledGraph = new OrientedGraph(new List<Relation>
+        {
+            new Relation(1, 2),
+            new Relation(1, 3),
+            new Relation(1, 4),
+            new Relation(3, 2),
+            new Relation(6, 7),
+        });
+        
+        private OrientedGraph _notCoupledGraph2 = new OrientedGraph(new List<Relation>
+        {
+            new Relation(1, 2),
+            new Relation(1, 3),
+            new Relation(1, 4),
+            new Relation(3, 2),
+            new Relation(6, 7),
+            new Relation(6, 5),
+        });
+        
         [Test]
         public void AdjacencyMatrix()
         {
@@ -49,6 +68,14 @@ namespace Tests
                 return;
             }
             Assert.AreEqual(1, 2);
+        }
+
+        [Test]
+        public void ConnectedGraphTest()
+        {
+            Assert.AreEqual(_notCoupledGraph.IsConnectedGraph(), false);
+            Assert.AreEqual(_notCoupledGraph2.IsConnectedGraph(), false);
+            Assert.AreEqual(_graph.IsConnectedGraph(), true);
         }
     }
 }

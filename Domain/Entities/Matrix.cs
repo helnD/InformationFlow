@@ -83,6 +83,22 @@ namespace Domain.Entities
             return new Matrix(result);
         }
 
+        public override bool Equals(object obj)
+        {
+            var matrix2 = obj as Matrix;
+
+            for (var row = 0; row < Height; row++)
+            {
+                for (var column = 0; column < Width; column++)
+                {
+                    if (this[row, column] != matrix2[row, column])
+                        return false;
+                }
+            }
+
+            return true;
+        }
+
         public int[][] ToArray() => 
             _matrix.Clone() as int[][];
 

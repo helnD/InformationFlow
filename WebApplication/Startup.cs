@@ -19,6 +19,7 @@ namespace WebApplication
         {
             if (env.IsDevelopment())
             {
+                app.UseWebpackDevMiddleware();
                 app.UseDeveloperExceptionPage();
             }
 

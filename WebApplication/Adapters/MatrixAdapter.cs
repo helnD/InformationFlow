@@ -7,15 +7,9 @@ namespace WebApplication.Adapters
 {
     public class MatrixAdapter
     {
-        public int[][][] AdaptAdjacencyMatrixWithPowers(Matrix adjacencyMatrix, IEnumerable<Matrix> powers)
+        public int[][][] AdaptAdjacencyMatrixWithPowers(IEnumerable<Matrix> powers)
         {
-            var result = new List<int[][]>
-            {
-                adjacencyMatrix.ToArray()
-            };
-            result.AddRange(powers.Select(power => power.ToArray()));
-
-            return result.ToArray();
+            return powers.Select(it => it.ToArray()).ToArray();
         }
 
         public BMatrix AdaptBMatrix(Domain.UseCase.BMatrix matrix)

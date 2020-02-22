@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Владимир\.nuget\packages\microsoft.net.test.sdk\16.2.0\build\netcoreapp1.0" t="Include">
+    <e p="C:\Users\1\.nuget\packages\microsoft.net.test.sdk\16.2.0\build\netcoreapp1.0" t="Include">
       <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
     </e>
-    <e p="C:\Users\Владимир\.nuget\packages\nunit3testadapter\3.13.0\build\netcoreapp1.0\nunit.engine.netstandard.dll" t="Include" />
-    <e p="C:\Users\Владимир\.nuget\packages\nunit3testadapter\3.13.0\build\netcoreapp1.0\NUnit3.TestAdapter.dll" t="Include" />
-    <e p="C:\Users\Владимир\.nuget\packages\nunit3testadapter\3.13.0\build\netcoreapp1.0\NUnit3.TestAdapter.pdb" t="Include" />
-    <e p="C:\Users\Владимир\.Rider2019.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Владимир\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Laba1_ISNP.1130547804.00" t="ExcludeRecursive" />
-    <e p="C:\Users\Владимир\RiderProjects\InformationFlow" t="IncludeFlat">
+    <e p="C:\Users\1\.nuget\packages\nunit3testadapter\3.13.0\build\netcoreapp1.0\nunit.engine.netstandard.dll" t="Include" />
+    <e p="C:\Users\1\.nuget\packages\nunit3testadapter\3.13.0\build\netcoreapp1.0\NUnit3.TestAdapter.dll" t="Include" />
+    <e p="C:\Users\1\.nuget\packages\nunit3testadapter\3.13.0\build\netcoreapp1.0\NUnit3.TestAdapter.pdb" t="Include" />
+    <e p="C:\Users\1\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\1\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Laba1_ISNP.290374186.00" t="ExcludeRecursive" />
+    <e p="C:\Users\1\RiderProjects\Laba1_ISNP" t="IncludeFlat">
       <e p="Domain" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
         <e p="Domain.csproj" t="IncludeRecursive" />
@@ -86,7 +86,10 @@
           </e>
         </e>
         <e p="WebApplication.csproj" t="IncludeRecursive" />
-        <e p="wwwroot" t="Include" />
+        <e p="wwwroot" t="Include">
+          <e p="bundle.js" t="Include" />
+          <e p="ffa2ab524eca0254fc0a29da7fa29d2a.png" t="Include" />
+        </e>
       </e>
     </e>
   </component>

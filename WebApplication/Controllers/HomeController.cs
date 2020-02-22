@@ -37,7 +37,7 @@ namespace WebApplication.Controllers
 
             return Json(new
             {
-                aMatrices = matrixAdapter.AdaptAdjacencyMatrixWithPowers(adjMatrix, powers),
+                aMatrices = matrixAdapter.AdaptAdjacencyMatrixWithPowers(powers),
                 graphInfo = graphInfoAdapter.AdaptGraphInfo(power, inputs, outputs),
                 tactsTable = graphInfoAdapter.AdaptTacts(taktsOfCreation, taktsOfExtinction, taktsOfStore),
                 bMatrix = matrixAdapter.AdaptBMatrix(bMatrix)

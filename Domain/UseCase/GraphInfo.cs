@@ -157,12 +157,12 @@ namespace Domain.UseCase
         {
             var result = new List<Matrix>();
             
-            var currentTact = 0;
+            var currentTact = 1;
             Matrix matrix;
 
             do
             {
-                matrix = _adjacencyMatrix.Power(currentTact + 1);
+                matrix = _adjacencyMatrix.Power(currentTact);
 
                 result.Add(matrix);
 
@@ -190,7 +190,7 @@ namespace Domain.UseCase
                 {
                     result.Add(column + 1);
                 }
-            }
+            }    
 
             return result;
         }

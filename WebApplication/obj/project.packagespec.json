@@ -1,26 +1,22 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "C:\\Users\\Владимир\\RiderProjects\\InformationFlow\\WebApplication\\WebApplication.csproj",
+    "projectUniqueName": "C:\\Users\\1\\RiderProjects\\Laba1_ISNP\\WebApplication\\WebApplication.csproj",
     "projectName": "WebApplication",
-    "projectPath": "C:\\Users\\Владимир\\RiderProjects\\InformationFlow\\WebApplication\\WebApplication.csproj",
-    "outputPath": "C:\\Users\\Владимир\\RiderProjects\\InformationFlow\\WebApplication\\obj\\",
+    "projectPath": "C:\\Users\\1\\RiderProjects\\Laba1_ISNP\\WebApplication\\WebApplication.csproj",
+    "outputPath": "C:\\Users\\1\\RiderProjects\\Laba1_ISNP\\WebApplication\\obj\\",
     "projectStyle": "PackageReference",
-    "fallbackFolders": [
-      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-    ],
     "originalTargetFrameworks": [
       "netcoreapp3.0"
     ],
     "sources": {
-      "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
       "https://api.nuget.org/v3/index.json": {}
     },
     "frameworks": {
       "netcoreapp3.0": {
         "projectReferences": {
-          "C:\\Users\\Владимир\\RiderProjects\\InformationFlow\\Domain\\Domain.csproj": {
-            "projectPath": "C:\\Users\\Владимир\\RiderProjects\\InformationFlow\\Domain\\Domain.csproj"
+          "C:\\Users\\1\\RiderProjects\\Laba1_ISNP\\Domain\\Domain.csproj": {
+            "projectPath": "C:\\Users\\1\\RiderProjects\\Laba1_ISNP\\Domain\\Domain.csproj"
           }
         }
       }
@@ -33,6 +29,12 @@
   },
   "frameworks": {
     "netcoreapp3.0": {
+      "dependencies": {
+        "Microsoft.AspNetCore.SpaServices": {
+          "target": "Package",
+          "version": "[3.0.0, )"
+        }
+      },
       "imports": [
         "net461",
         "net462",

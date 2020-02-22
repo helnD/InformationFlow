@@ -26,9 +26,7 @@ namespace Domain.Entities
         {
             var relations = _relations.ToList();
 
-            var max1 = _relations.Max(it => it.Start);
-            var max2 = _relations.Max(it => it.End);
-            var max = max1 > max2 ? max1 : max2;
+            var max = MaxNode();
             
             var matrix = new int[max][];
             for (var index = 0; index < max; index++)
@@ -39,6 +37,53 @@ namespace Domain.Entities
             foreach (var relation in relations)
             {
                 matrix[relation.Start - 1][relation.End - 1] = 1;
+            }
+
+            return new Matrix(matrix);
+        }
+
+        public bool IsConnectedGraph()
+        {
+            var adjacencyMatrix = ToNotOrientedMatrix();
+            var first = adjacencyMatrix.Clone() as Matrix;
+            var power = 2;
+
+            var second = first.Power(power);
+
+            while (!first.Equals(second))
+            {
+                first = second;
+                second = adjacencyMatrix.Power(++power);
+            }
+
+            return second.IsZeroMatrix();
+        }
+
+        private int MaxNode()
+        {
+            var max1 = _relations.Max(it => it.Start);
+            var max2 = _relations.Max(it => it.End);
+            var max = max1 > max2 ? max1 : max2;
+
+            return max;
+        }
+
+        private Matrix ToNotOrientedMatrix()
+        {
+            var relations = _relations.ToList();
+
+            var max = MaxNode();
+            
+            var matrix = new int[max][];
+            for (var index = 0; index < max; index++)
+            {
+                matrix[index] = new int[max];
+            }
+
+            foreach (var relation in relations)
+            {
+                matrix[relation.Start - 1][relation.End - 1] = 1;
+                matrix[relation.End - 1][relation.Start - 1] = 1;
             }
 
             return new Matrix(matrix);
